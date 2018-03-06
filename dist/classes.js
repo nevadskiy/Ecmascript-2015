@@ -5,14 +5,17 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Task = function () {
+	// ALL METHODS ARE PUBLIC
+
+	// DEFAULT VALUE TO STATIC METHOD
 	function Task() {
-		var title = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+		var title = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Task.getDefaultTitle();
 
 		_classCallCheck(this, Task);
 
 		console.log('creating task');
 		this.title = title;
-		this.done = false;
+		this._done = false;
 		Task.count += 1; // autoincrement self var
 	} // NOT COMMA AFTER THIS
 
@@ -20,6 +23,29 @@ var Task = function () {
 		key: 'complete',
 		value: function complete() {
 			this.done = true;
+		}
+
+		// STATIC METHODS (cant be called from object)
+
+	}, {
+		key: 'done',
+
+
+		//GETS AND SETS are filters (like accessors and mutators from laravel)
+		get: function get() {
+			return this._done === true ? 'Task is done' : 'Task is active';
+		},
+		set: function set(value) {
+			if (value !== undefined && typeof value === 'boolean') {
+				this._done = value;
+			} else {
+				console.error(value + ' is not valid');
+			}
+		}
+	}], [{
+		key: 'getDefaultTitle',
+		value: function getDefaultTitle() {
+			return 'Task';
 		}
 	}]);
 
@@ -32,8 +58,14 @@ var Task = function () {
 Task.count = 0;
 
 var task = new Task('Learn ES6');
+var task2 = new Task();
 
-console.log(task.title);
+// console.log(task.title);
+// console.log(task2.title);
+
+console.log(task.done);
+task.complete();
+console.log(task.done);
 
 /**
 console.log(typeof Task); // Function that create object
