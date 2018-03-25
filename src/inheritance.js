@@ -1,8 +1,9 @@
 class Task {
 	constructor(title) {
-		this.title = title;
+		this._title = title;
 		this.status = false;
 		console.log(title);
+		Task.count++;
 		console.log('me super');
 	}
 
@@ -11,7 +12,21 @@ class Task {
 						  // заполнитель места
 		console.log(`Task "${this.title}" is completed`)
 	}
+
+	get title() {
+		return this._title;
+	}
+
+	set title(value) {
+		this._title = value;
+	}
+
+	static getDefaultTitle() {
+		return 'Task';
+	}
 }
+
+Task.count = 0;
 
 // EXTENDS METHODS OF TASK
 class SubTask extends Task {
@@ -33,6 +48,9 @@ let subtask = new SubTask('Learn inheritance', task);
 
 console.log(task);
 console.log(subtask);
+
+console.log(SubTask.getDefaultTitle());
+console.log(SubTask.count);
 
 task.complete();
 subtask.complete();

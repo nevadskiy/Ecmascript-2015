@@ -14,9 +14,10 @@ var Task = function () {
 	function Task(title) {
 		_classCallCheck(this, Task);
 
-		this.title = title;
+		this._title = title;
 		this.status = false;
 		console.log(title);
+		Task.count++;
 		console.log('me super');
 	}
 
@@ -27,13 +28,27 @@ var Task = function () {
 			// заполнитель места
 			console.log('Task "' + this.title + '" is completed');
 		}
+	}, {
+		key: 'title',
+		get: function get() {
+			return this._title;
+		},
+		set: function set(value) {
+			this._title = value;
+		}
+	}], [{
+		key: 'getDefaultTitle',
+		value: function getDefaultTitle() {
+			return 'Task';
+		}
 	}]);
 
 	return Task;
 }();
 
-// EXTENDS METHODS OF TASK
+Task.count = 0;
 
+// EXTENDS METHODS OF TASK
 
 var SubTask = function (_Task) {
 	_inherits(SubTask, _Task);
@@ -66,6 +81,9 @@ var subtask = new SubTask('Learn inheritance', task);
 
 console.log(task);
 console.log(subtask);
+
+console.log(SubTask.getDefaultTitle());
+console.log(SubTask.count);
 
 task.complete();
 subtask.complete();
