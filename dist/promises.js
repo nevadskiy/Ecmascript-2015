@@ -104,3 +104,27 @@ applyForVisa({})
 });
 
 // Promise can be in 3 statuses: pending, resolved, rejected
+
+
+/**
+ * ASYNC
+ */
+
+//Async functions
+Promise.all([
+    httpGet('/article/promise/user.json'),
+    httpGet('/article/promise/guest.json'),
+    httpGet('/article/promise/no-such-page.json') // this reject error
+  ]).then(
+    result => alert("not here"), 
+    error => alert("here error: " + error.message) // will show error
+  )
+
+  // Race for only first promise in async functions
+  Promise.race([
+    httpGet('/article/promise/user.json'),
+    httpGet('/article/promise/guest.json')
+  ]).then(firstResult => {
+    firstResult = JSON.parse(firstResult);
+    alert( firstResult.name ); // iliakan or guest, depends on who load first
+  });
