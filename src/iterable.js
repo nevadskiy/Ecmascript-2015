@@ -104,4 +104,65 @@ console.log(random.next().value);
 //     next = iterator.next();
 // }
 
-// 14:10...
+// CLASS ITERATOR
+// Pattern iterator (works with wile item.done true)
+class ArrayIterator {
+    constructor(array) {
+        // this.array = array;
+
+        //map need for immuting original array because map returns new array
+        this.array = array.map(item => item).sort();
+        this.index = 0;
+    }
+
+    next() {
+        let result = {value: undefined, done: true }
+
+        if (this.index < this.array.length) {
+            result.value = this.array[this.index];
+            result.done = false;
+            this.index++;
+        }
+
+        return result;
+    }
+} // should be on top due to class not hoisting
+
+
+class TaskList {
+    constructor() {
+        this.tasks = [];
+    }
+
+    addTasks(...tasks) {
+        this.tasks = this.tasks.concat(tasks);
+    }
+    
+    [Symbol.iterator]() {
+        return new ArrayIterator(this.tasks);
+
+        // let tasks = this.tasks;
+        // let index = 0;
+        
+        // return {
+        //     next() {
+        //         let result = {value: undefined, done: true }
+
+        //         if (index < tasks.length) {
+        //             result.value = tasks[index];
+        //             result.done = false;
+        //             index++;
+        //         }
+
+        //         return result;
+        //     }
+        // }
+    } // If comment method iterator, let .. of .. loop will not work with error Symbol.iterator is not a function
+}
+
+let taskList = new TaskList();
+taskList.addTasks('Learn ES', 'Learn ES6');
+
+for (let task of taskList) {
+    console.log(task);
+}
