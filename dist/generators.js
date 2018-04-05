@@ -1,11 +1,17 @@
 'use strict';
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var _marked = /*#__PURE__*/regeneratorRuntime.mark(generator),
-    _marked2 = /*#__PURE__*/regeneratorRuntime.mark(range);
+    _marked2 = /*#__PURE__*/regeneratorRuntime.mark(range),
+    _marked3 = /*#__PURE__*/regeneratorRuntime.mark(generator),
+    _marked4 = /*#__PURE__*/regeneratorRuntime.mark(generating);
 
 function generator() {
     return regeneratorRuntime.wrap(function generator$(_context) {
@@ -165,6 +171,12 @@ try {
 
         console.log(_num);
     }
+
+    // Part 2
+
+    /**
+     * Declaration
+     */
 } catch (err) {
     _didIteratorError2 = true;
     _iteratorError2 = err;
@@ -179,3 +191,106 @@ try {
         }
     }
 }
+
+function generator() {
+    return regeneratorRuntime.wrap(function generator$(_context4) {
+        while (1) {
+            switch (_context4.prev = _context4.next) {
+                case 0:
+                case 'end':
+                    return _context4.stop();
+            }
+        }
+    }, _marked3, this);
+}
+
+/**
+ * Anonymous generator declaration
+ */
+var generation = /*#__PURE__*/regeneratorRuntime.mark(function generation() {
+    return regeneratorRuntime.wrap(function generation$(_context5) {
+        while (1) {
+            switch (_context5.prev = _context5.next) {
+                case 0:
+                case 'end':
+                    return _context5.stop();
+            }
+        }
+    }, generation, this);
+});
+
+/**
+ * Object method
+ */
+var obj = {
+    generator: /*#__PURE__*/regeneratorRuntime.mark(function generator() {
+        return regeneratorRuntime.wrap(function generator$(_context6) {
+            while (1) {
+                switch (_context6.prev = _context6.next) {
+                    case 0:
+                    case 'end':
+                        return _context6.stop();
+                }
+            }
+        }, generator, this);
+    })
+};
+
+var Something = function () {
+    function Something() {
+        _classCallCheck(this, Something);
+    }
+
+    _createClass(Something, [{
+        key: 'generator',
+        value: /*#__PURE__*/regeneratorRuntime.mark(function generator() {
+            return regeneratorRuntime.wrap(function generator$(_context7) {
+                while (1) {
+                    switch (_context7.prev = _context7.next) {
+                        case 0:
+                        case 'end':
+                            return _context7.stop();
+                    }
+                }
+            }, generator, this);
+        })
+    }]);
+
+    return Something;
+}();
+/////
+
+
+function generating() {
+    var result;
+    return regeneratorRuntime.wrap(function generating$(_context8) {
+        while (1) {
+            switch (_context8.prev = _context8.next) {
+                case 0:
+                    _context8.next = 2;
+                    return;
+
+                case 2:
+                    _context8.t0 = _context8.sent;
+                    result = 1 + _context8.t0;
+
+                    console.log('Result: ' + result);
+                    _context8.next = 7;
+                    return 1;
+
+                case 7:
+                    _context8.next = 9;
+                    return 2;
+
+                case 9:
+                case 'end':
+                    return _context8.stop();
+            }
+        }
+    }, _marked4, this);
+}
+
+iterator = generating();
+console.log(iterator.next(1)); //first restart
+console.log(iterator.next(1)); //second restart
+console.log(iterator.next()); //done true now

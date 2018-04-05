@@ -68,3 +68,43 @@ let numbers = {
 for (let num of numbers.range(1, 10)) {
     console.log(num);
 }
+
+// Part 2
+
+/**
+ * Declaration
+ */
+function *generator() {
+
+}
+
+/**
+ * Anonymous generator declaration
+ */
+let generation = function*() {}
+
+/**
+ * Object method
+ */
+let obj = {
+    *generator() {
+
+    }
+}
+class Something {
+    *generator() {
+
+    }
+}
+/////
+function *generating() {
+    let result = 1 + (yield);
+    console.log(`Result: ${result}`)
+    yield 1; //make pause and return 1
+    yield 2; //again pause and return 2
+}
+
+iterator = generating();
+console.log(iterator.next(1)); //first restart
+console.log(iterator.next(1)); //second restart
+console.log(iterator.next()); //done true now
