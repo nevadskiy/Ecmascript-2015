@@ -1,4 +1,4 @@
 node_modules
 package-lock.json
-dist/let_const_spread.js
 .idea
+dist
